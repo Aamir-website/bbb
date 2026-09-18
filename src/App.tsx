@@ -298,7 +298,7 @@ function App() {
             fit="contain"
             className="desktop-image hero-image-layer fixed no-parallax-y hero-design-text"
             style={{ inset: 0, width: '100%', height: '100%', zIndex: 20 }}
-            narrownessScale={1}
+            narrownessScale={0}
             narrownessTranslateY={1}
           />
         </div>
