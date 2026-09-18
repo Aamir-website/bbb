@@ -473,7 +473,7 @@ video { transform: translateZ(0); }
    linked to me.webp: same X/Y travel, uniform scale, moves as one unit */
 .hero-design.desktop-image .testimonial-group {
   transform: translate(calc(var(--narrowness, 0) * 10vw), calc(var(--narrowness, 0) * 20vh)) scale(calc(1 - var(--narrowness, 0) * 0));
-  transform-origin: center center;
+  transform-origin: center button;
   transition: transform 0.15s ease-out;
 }
 
