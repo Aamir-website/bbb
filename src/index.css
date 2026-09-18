@@ -444,31 +444,41 @@ video { transform: translateZ(0); }
 }
 
 /* =========================================================
-   RESPONSIVE HERO TRANSITION
-   Desktop → Intermediate → Tablet
-   --narrowness: 0 = full desktop
-   --narrowness: 1 = final compact/tablet state
+   FLUID DESKTOP → TABLET TRANSITION
+   Change starts immediately as viewport gets narrower.
    ========================================================= */
 
-.hero-img-me,
-.hero-img-me2,
-.hero-design.desktop-image .title-group,
-.hero-design.desktop-image .testimonial-group {
-  transition: transform 0.15s ease-out;
+:root {
+  /*
+    1 = full desktop starting composition
+    0 = compact/tablet composition
+
+    Change these two values if your actual desktop/tablet
+    target widths are different.
+  */
+  --hero-progress: clamp(
+    0,
+    calc((100vw - 768px) / (2048 - 768)),
+    1
+  );
 }
 
 
 /* =========================================================
    MAIN PORTRAIT — me.webp
-   Keep large, move toward center + slightly downward,
-   with a subtle scale increase.
    ========================================================= */
 
 .hero-img-me {
   transform:
-    translateX(calc(var(--narrowness, 0) * 5vw))
-    translateY(calc(var(--narrowness, 0) * 22vh))
-    scale(calc(1 + var(--narrowness, 0) * 0.10));
+    translateX(
+      calc((1 - var(--hero-progress)) * 7vw)
+    )
+    translateY(
+      calc((1 - var(--hero-progress)) * 22vh)
+    )
+    scale(
+      calc(1 + (1 - var(--hero-progress)) * 0.12)
+    );
 
   transform-origin: center center;
 }
@@ -476,58 +486,58 @@ video { transform: translateZ(0); }
 
 /* =========================================================
    SECONDARY PORTRAIT — me2.webp
-   Gradually gets smaller and moves toward the left.
-   Eventually exits the viewport naturally.
    ========================================================= */
 
 .hero-img-me2 {
   transform:
-    translateX(calc(var(--narrowness, 0) * -16vw))
-    translateY(calc(var(--narrowness, 0) * 8vh))
-    scale(calc(1 - var(--narrowness, 0) * 0.50));
+    translateX(
+      calc((1 - var(--hero-progress)) * -18vw)
+    )
+    translateY(
+      calc((1 - var(--hero-progress)) * 8vh)
+    )
+    scale(
+      calc(1 - (1 - var(--hero-progress)) * 0.50)
+    );
 
   transform-origin: center center;
 }
 
 
 /* =========================================================
-   TITLE — AAMIR NAQVI
-   Treat AAMIR + NAQVI as ONE complete element.
-   Moves upward + toward center and becomes larger.
+   AAMIR NAQVI — ONE COMPLETE GROUP
    ========================================================= */
 
 .hero-design.desktop-image .title-group {
   transform:
     translate(
-      calc(var(--narrowness, 0) * 750px),
-      calc(var(--narrowness, 0) * -350px)
+      calc((1 - var(--hero-progress)) * 35vw),
+      calc((1 - var(--hero-progress)) * -28vh)
     )
-    scale(calc(1 + var(--narrowness, 0) * 0.40));
+    scale(
+      calc(1 + (1 - var(--hero-progress)) * 0.40)
+    );
 
   transform-origin: center top;
 }
 
 
 /* =========================================================
-   TESTIMONIAL COLLECTION
-   ALL testimonials move as ONE GROUP.
-   DO NOT individually transform testimonial children.
-   
-   The group becomes slightly larger/compact and moves
-   inward toward the main portrait.
+   ALL TESTIMONIALS — ONE GROUP
    ========================================================= */
 
 .hero-design.desktop-image .testimonial-group {
   transform:
     translate(
-      calc(var(--narrowness, 0) * 10vw),
-      calc(var(--narrowness, 0) * 20vh)
+      calc((1 - var(--hero-progress)) * 7vw),
+      calc((1 - var(--hero-progress)) * 18vh)
     )
-    scale(calc(1 + var(--narrowness, 0) * 0.12));
+    scale(
+      calc(1 + (1 - var(--hero-progress)) * 0.12)
+    );
 
   transform-origin: center center;
 }
-
 @media (prefers-reduced-motion: reduce) {
   .bounce-arrow,
   .animate-fade-in-delayed,
