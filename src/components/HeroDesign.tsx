@@ -22,7 +22,7 @@ interface HeroDesignProps {
  * CSS transform so it lines up with the hero photo behind it, at any viewport size.
  */
 export function HeroDesign({ html, width, height, fit = 'cover', className = '', style,
-  narrownessScale = 0, narrownessTranslateY = 0 }: HeroDesignProps) {
+  narrownessScale = 0, narrownessTranslateY = 4 }: HeroDesignProps) {
   const boxRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
 
