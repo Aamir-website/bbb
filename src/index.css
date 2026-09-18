@@ -443,101 +443,40 @@ video { transform: translateZ(0); }
   cursor: pointer;
 }
 
-/* =========================================================
-   FLUID DESKTOP → TABLET TRANSITION
-   Change starts immediately as viewport gets narrower.
-   ========================================================= */
-
-:root {
-  /*
-    1 = full desktop starting composition
-    0 = compact/tablet composition
-
-    Change these two values if your actual desktop/tablet
-    target widths are different.
-  */
-  --hero-progress: clamp(
-    0,
-    calc((100vw - 768px) / (2048 - 768)),
-    1
-  );
-}
-
-
-/* =========================================================
-   MAIN PORTRAIT — me.webp
-   ========================================================= */
-
-.hero-img-me {
-  transform:
-    translateX(
-      calc((1 - var(--hero-progress)) * 7vw)
-    )
-    translateY(
-      calc((1 - var(--hero-progress)) * 22vh)
-    )
-    scale(
-      calc(1 + (1 - var(--hero-progress)) * 0.12)
-    );
-
-  transform-origin: center center;
-}
-
-
-/* =========================================================
-   SECONDARY PORTRAIT — me2.webp
-   ========================================================= */
-
+/* === RESPONSIVE HERO IMAGES (desktop only, 768px–1024px) === */
+/* --narrowness goes from 0 (>=1024px) to 1 (<=768px) */
+.hero-img-me,
 .hero-img-me2 {
-  transform:
-    translateX(
-      calc((1 - var(--hero-progress)) * -18vw)
-    )
-    translateY(
-      calc((1 - var(--hero-progress)) * 8vh)
-    )
-    scale(
-      calc(1 - (1 - var(--hero-progress)) * 0.50)
-    );
-
-  transform-origin: center center;
+  transition: transform 0.15s ease-out;
 }
 
+/* me.webp: stays large, moves toward center + middle-bottom, slightly larger */
+.hero-img-me {
+  transform: translateX(calc(var(--narrowness, 0) * -12vw)) translateY(calc(var(--narrowness, 0) * 22vh)) scale(calc(1 + var(--narrowness, 0) * 0.08));
+}
 
-/* =========================================================
-   AAMIR NAQVI — ONE COMPLETE GROUP
-   ========================================================= */
+/* me2.webp: gradually smaller + moves left, eventually off left edge */
+.hero-img-me2 {
+  transform: translateX(calc(var(--narrowness, 0) * -55vw)) translateY(calc(var(--narrowness, 0) * 8vh)) scale(calc(1 - var(--narrowness, 0) * 0.45));
+}
 
+/* === TABLET TRANSITION: title + testimonials as groups, linked to me.webp === */
+
+/* Title group (AAMIR + NAQVI wrapped in .title-group) — bigger, moves up + toward center-top */
 .hero-design.desktop-image .title-group {
-  transform:
-    translate(
-      calc((1 - var(--hero-progress)) * 35vw),
-      calc((1 - var(--hero-progress)) * -28vh)
-    )
-    scale(
-      calc(1 + (1 - var(--hero-progress)) * 0.40)
-    );
-
+  transform: translate(calc(var(--narrowness, 0) * 650px), calc(var(--narrowness, 0) * -350px)) scale(calc(1 + var(--narrowness, 0) * 0.15));
   transform-origin: center top;
+  transition: transform 0.15s ease-out;
 }
 
-
-/* =========================================================
-   ALL TESTIMONIALS — ONE GROUP
-   ========================================================= */
-
+/* Testimonial group (all testimonials wrapped in .testimonial-group) —
+   linked to me.webp: same X/Y travel, uniform scale, moves as one unit */
 .hero-design.desktop-image .testimonial-group {
-  transform:
-    translate(
-      calc((1 - var(--hero-progress)) * 7vw),
-      calc((1 - var(--hero-progress)) * 18vh)
-    )
-    scale(
-      calc(1 + (1 - var(--hero-progress)) * 0.12)
-    );
-
+  transform: translate(calc(var(--narrowness, 0) * -12vw), calc(var(--narrowness, 0) * 22vh)) scale(calc(1 - var(--narrowness, 0) * 0.3));
   transform-origin: center center;
+  transition: transform 0.15s ease-out;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .bounce-arrow,
   .animate-fade-in-delayed,
