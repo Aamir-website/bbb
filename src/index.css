@@ -472,7 +472,7 @@ video { transform: translateZ(0); }
 /* Testimonial group (all testimonials wrapped in .testimonial-group) —
    linked to me.webp: same X/Y travel, uniform scale, moves as one unit */
 .hero-design.desktop-image .testimonial-group {
-  transform: translate(calc(var(--narrowness, 0) * 10vw), calc(var(--narrowness, 0) * 22vh)) scale(calc(1 - var(--narrowness, 0) * 0));
+  transform: translate(calc(var(--narrowness, 0) * 10vw), calc(var(--narrowness, 0) * 100vh)) scale(calc(1 - var(--narrowness, 0) * 0));
   transform-origin: center center;
   transition: transform 0.15s ease-out;
 }
