@@ -460,47 +460,20 @@ video { transform: translateZ(0); }
   transform: translateX(calc(var(--narrowness, 0) * -55vw)) translateY(calc(var(--narrowness, 0) * 8vh)) scale(calc(1 - var(--narrowness, 0) * 0.45));
 }
 
-/* === TABLET TRANSITION: title + testimonials linked to me.webp === */
+/* === TABLET TRANSITION: title + testimonials as groups, linked to me.webp === */
 
-/* Title: AAMIR NAQVI treated as one element — bigger, moves up + toward center-top */
-.hero-design.desktop-image #text_2,
-.hero-design.desktop-image #text_3 {
-  transform: translate(calc(var(--narrowness, 0) * 650px), calc(var(--narrowness, 0) * -350px)) scale(calc(1 + var(--narrowness, 0) * 0.15)) !important;
+/* Title group (AAMIR + NAQVI wrapped in .title-group) — bigger, moves up + toward center-top */
+.hero-design.desktop-image .title-group {
+  transform: translate(calc(var(--narrowness, 0) * 650px), calc(var(--narrowness, 0) * -350px)) scale(calc(1 + var(--narrowness, 0) * 0.15));
+  transform-origin: center top;
   transition: transform 0.15s ease-out;
 }
 
-/* All testimonials: one shared transform, linked to me.webp's movement direction.
-   They move together as a group — same X, same Y, same scale — following me.webp
-   toward center-bottom as the viewport narrows. */
-.hero-design.desktop-image #text_4,
-.hero-design.desktop-image #text_5,
-.hero-design.desktop-image #text_6,
-.hero-design.desktop-image #text_7,
-.hero-design.desktop-image #text_8,
-.hero-design.desktop-image #text_9,
-.hero-design.desktop-image #text_10,
-.hero-design.desktop-image #text_11,
-.hero-design.desktop-image #text_12,
-.hero-design.desktop-image #text_13,
-.hero-design.desktop-image #text_14,
-.hero-design.desktop-image #text_15,
-.hero-design.desktop-image #text_16,
-.hero-design.desktop-image #text_17,
-.hero-design.desktop-image #text_18,
-.hero-design.desktop-image #text_19,
-.hero-design.desktop-image #text_20,
-.hero-design.desktop-image #text_21,
-.hero-design.desktop-image #text_22,
-.hero-design.desktop-image #text_23,
-.hero-design.desktop-image #text_24,
-.hero-design.desktop-image #image_25,
-.hero-design.desktop-image #image_26,
-.hero-design.desktop-image #image_27,
-.hero-design.desktop-image #image_28,
-.hero-design.desktop-image #image_29,
-.hero-design.desktop-image #image_30,
-.hero-design.desktop-image #image_31 {
-  transform: translate(calc(var(--narrowness, 0) * -12vw), calc(var(--narrowness, 0) * 22vh)) scale(calc(1 - var(--narrowness, 0) * 0.3)) !important;
+/* Testimonial group (all testimonials wrapped in .testimonial-group) —
+   linked to me.webp: same X/Y travel, uniform scale, moves as one unit */
+.hero-design.desktop-image .testimonial-group {
+  transform: translate(calc(var(--narrowness, 0) * -12vw), calc(var(--narrowness, 0) * 22vh)) scale(calc(1 - var(--narrowness, 0) * 0.3));
+  transform-origin: center center;
   transition: transform 0.15s ease-out;
 }
 
